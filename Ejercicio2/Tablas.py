@@ -1,8 +1,7 @@
 import json
-import numpy as numpy
-import panda as panda
+import pandas as panda
 import sqlite3
-import dataclasses
+
 
 with open('users.json') as file:
     data = json.load(file)
@@ -16,7 +15,7 @@ with open('users.json') as file:
             del info_user["ips"]
             info_user['username'] = nombre_user
             list_users.append(info_user)
-        return panda.json_normalize(list_users)
+
 
     def creacionBD():
         conexion = sqlite3.connect("basededatos.db")
