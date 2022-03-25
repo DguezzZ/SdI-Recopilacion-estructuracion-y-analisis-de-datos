@@ -1,6 +1,6 @@
 import json
 import numpy as numpy
-import panda as panda
+import pandas as pd
 import sqlite3
 import dataclasses
 
@@ -16,32 +16,39 @@ with open('users.json') as file:
             del info_user["ips"]
             info_user['username'] = nombre_user
             list_users.append(info_user)
-        return panda.json_normalize(list_users)
+        return pd.json_normalize(list_users)
+
 
     def creacionBD():
         conexion = sqlite3.connect("basededatos.db")
         print("Base de datos abierta con exito")
-        conexion.execute('''CREATE TABLE usuarios
-                    (ID INT PRIMARY KEY NOT NULL,
-                    NOMBRE      TEXT    NOT NULL,
-                    TLFN        TEXT    NOT NULL,
-                    CONTRA      TEXT    NOT NULL,
-                    PROV        TEXT    NOT NULL,
-                    PERMISOS    TEXT    NOT NULL,
-                    FECHA       TEXT    NOT NULL,
-                    IPS         TEXT    NOT NULL);''')
-
+        try:
+            conexion.execute('''CREATE TABLE usuarios
+                        (telefono       TEXT    NOT NULL,
+                        contrasena      TEXT    NOT NULL,
+                        provincia       TEXT    NOT NULL,
+                        permisos        TEXT    NOT NULL,
+                        fechas          TEXT    NOT NULL,
+                        ips             TEXT    NOT NULL);''')
+            print("Tabla creada")
+        except sqlite3.OperationalError:
+            print("Tabla ya existente")
+        conexion.close()
         for info in data['usuarios']:
-            sql = "INSERT INTO usuarios(ID,NOMBRE,TLFN,CONTRA,PROV,PERMISOS,FECHA,IPS) VALUES('%s',%d,%d,%d,%d,%d,%d,%d)" % (
-            info['ID'], info['NOMBRE'], info['TLFN'], info['CONTRA'], info['PROV'], info['PERMISOS'],
-            info['FECHA'], info['IPS'])
+            sql = "INSERT INTO usuarios(telefono,contrasena,provincia,permisos,fechas,ips) VALUES('%s','%s','%s','%s','%s','%s')" % (
+                info['telefono'], info['contrasena'], info['provincia'], info['permisos'],
+                info['fechas'], info['IPS'])
 
             conexion.execute(sql)
             conexion.commit()
 
-        cursor = conexion.execute("select id,nombre,tlfn,contra,prov,permisos,fecha,ips from usuarios")
+        cursor = conexion.execute("select nombre,telefono,contrasena,provincia,permisos,fecha,ips from usuarios")
         for row in cursor:
-            print('ID= ', row[0], 'Name= ', row[1], 'Telefono= ', row[2], 'Contraseña= ', row[3], 'Provincia= ', row[4], 'Permisos= ', row[5], 'Fecha= ', row[6], 'IPS= ', row[7])
+            print(row)
 
         print("operacion terminada")
         conexion.close()
+
+if __name__ == '__main__':
+    parseUsersInfo()
+    creacionBD()
