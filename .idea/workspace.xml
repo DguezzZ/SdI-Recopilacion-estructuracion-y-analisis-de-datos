@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< HEAD
     <list default="true" id="97bb7275-efb0-4e07-aa55-a0c5535dca4f" name="Changes" comment="Creación de la BD">
       <change afterPath="$PROJECT_DIR$/Ejercicio2/ConsultasEJ2.py" afterDir="false" />
+=======
+    <list default="true" id="97bb7275-efb0-4e07-aa55-a0c5535dca4f" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/basededatos.db" afterDir="false" />
+>>>>>>> 197d6a86f871b93908a2810e81f722679bee9aa6
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ejercicio2/Tablas.py" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicio2/Tablas.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Ejercicio2/database.db" beforeDir="false" afterPath="$PROJECT_DIR$/Ejercicio2/database.db" afterDir="false" />
@@ -39,6 +44,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
+<<<<<<< HEAD
   <component name="RunManager" selected="Python.ConsultasEJ2">
     <configuration name="ConsultasEJ2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SdI-Recopilacion-estructuracion-y-analisis-de-datos" />
@@ -84,6 +90,9 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+=======
+  <component name="RunManager">
+>>>>>>> 197d6a86f871b93908a2810e81f722679bee9aa6
     <configuration name="Tablas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="SdI-Recopilacion-estructuracion-y-analisis-de-datos" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -108,8 +117,11 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< HEAD
         <item itemvalue="Python.ConsultasEJ2" />
         <item itemvalue="Python.Tablas (1)" />
+=======
+>>>>>>> 197d6a86f871b93908a2810e81f722679bee9aa6
         <item itemvalue="Python.Tablas" />
       </list>
     </recent_temporary>
@@ -124,16 +136,21 @@
       <updated>1648144067354</updated>
       <workItem from="1648144068923" duration="86000" />
       <workItem from="1648206855049" duration="809000" />
+<<<<<<< HEAD
       <workItem from="1648207871789" duration="1382000" />
       <workItem from="1648229416695" duration="1519000" />
       <workItem from="1648319666343" duration="1285000" />
       <workItem from="1648398910963" duration="1921000" />
+=======
+      <workItem from="1648207871789" duration="5014000" />
+>>>>>>> 197d6a86f871b93908a2810e81f722679bee9aa6
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+<<<<<<< HEAD
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
@@ -153,5 +170,9 @@
     <SUITE FILE_PATH="coverage/SdI_Recopilacion_estructuracion_y_analisis_de_datos$Tablas__1_.coverage" NAME="Tablas (1) Coverage Results" MODIFIED="1648405702429" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ejercicio2" />
     <SUITE FILE_PATH="coverage/SdI_Recopilacion_estructuracion_y_analisis_de_datos$ConsultasEJ2.coverage" NAME="ConsultasEJ2 Coverage Results" MODIFIED="1648405707529" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/Ejercicio2" />
     <SUITE FILE_PATH="coverage/SdI_Recopilacion_estructuracion_y_analisis_de_datos$Tablas.coverage" NAME="Tablas Coverage Results" MODIFIED="1648404798154" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+=======
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SdI_Recopilacion_estructuracion_y_analisis_de_datos$Tablas.coverage" NAME="Tablas Coverage Results" MODIFIED="1648213760666" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+>>>>>>> 197d6a86f871b93908a2810e81f722679bee9aa6
   </component>
 </project>
