@@ -11,7 +11,7 @@ def createDB():
     controlador.execute("DROP TABLE IF EXISTS ips")
     controlador.execute("DROP TABLE IF EXISTS legal")
 
-    controlador.execute("CREATE TABLE usuarios (id text, telefono integer, contrasena text, provincia text, "
+    controlador.execute("CREATE TABLE usuarios (id text, telefono text, contrasena text, provincia text, "
                       "permisos bool, emails_total integer, emails_phishing integer, emails_clicados integer, "
                       "constraint PK_usuarios primary key (id)) ")
     controlador.execute(
@@ -69,11 +69,14 @@ def rellenaTablasJson():
                         arrayFechas.append(fecha)
 
                 arrayIps = []
-                for ip in usuario[id]["ips"]:
-                    if ip not in arrayIps:
-                        query = "INSERT INTO ips (id,ip) VALUES (\'{}\',\'{}\')".format(id, ip)
-                        controlador.execute(query)
-                        arrayIps.append(ip)
+                if usuario[id]["ips"]== "None":
+                    query = "INSERT INTO ips (id,ip) VALUES (\'{}\',None)".format(id,ip)
+                else:
+                    for ip in usuario[id]["ips"]:
+                        if ip not in arrayIps:
+                            query = "INSERT INTO ips (id,ip) VALUES (\'{}\',\'{}\')".format(id, ip)
+                            controlador.execute(query)
+                            arrayIps.append(ip)
     conexion.commit()
 
     with open("legal.json", "r") as file:
