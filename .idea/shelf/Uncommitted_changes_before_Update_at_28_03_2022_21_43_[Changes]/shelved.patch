@@ -1,0 +1,71 @@
+Index: Ejercicio2/AnalisisDatos.py
+===================================================================
+diff --git a/Ejercicio2/AnalisisDatos.py b/Ejercicios2, 3 y 4/Ejercicio3.py
+rename from Ejercicio2/AnalisisDatos.py
+rename to Ejercicios2, 3 y 4/Ejercicio3.py
+--- a/Ejercicio2/AnalisisDatos.py	
++++ b/Ejercicios2, 3 y 4/Ejercicio3.py	
+@@ -69,7 +69,6 @@
+             cont = cont + 1
+     return cont
+ 
+-
+ def mediana(dataframe):
+     return np.median(dataframe["emails_phishing"].to_numpy())
+ 
+Index: Ejercicio2/ConsultasEJ4.py
+===================================================================
+diff --git a/Ejercicio2/ConsultasEJ4.py b/Ejercicios2, 3 y 4/Ejercicio4.py
+rename from Ejercicio2/ConsultasEJ4.py
+rename to Ejercicios2, 3 y 4/Ejercicio4.py
+--- a/Ejercicio2/ConsultasEJ4.py	
++++ b/Ejercicios2, 3 y 4/Ejercicio4.py	
+@@ -1,9 +1,7 @@
+ import pandas as pd
+ import sqlite3
+-import numpy as np
+ import matplotlib.pyplot as plt
+-import hashlib
+-from urllib.request import urlopen
++
+ 
+ conexion = sqlite3.connect('database.db')
+ controlador = conexion.cursor()
+@@ -85,25 +83,5 @@
+ # print("Media de conexiones de usuarios con contraseña vulnerable:", mediaConexionesVulnerables(True))
+ # print("Media de conexiones de usuarios con contraseña no vulnerable:", mediaConexionesVulnerables(False))
+ 
+-def webs_creacion():
+-    dataframe = pd.read_sql_query("SELECT creacion, url, cookies, aviso, proteccion_de_datos FROM webs ORDER BY url", conexion)
+-    dataframe["Politicas"] = dataframe["cookies"] + dataframe["aviso"] + dataframe["proteccion_de_datos"]
+-    dataframe_cumplen = dataframe[dataframe["Politicas"] == 3]
+-    print(dataframe_cumplen)
+-    dataframe_no_cumplen = dataframe[dataframe["Politicas"] != 3]
+-    print(dataframe_no_cumplen)
+-
+-
+-def num_contrasenas_comprometidas():
+-    dataframe = pd.read_sql_query(
+-        "SELECT id, contrasena FROM usuarios",conexion)
+-    dataframe["IPs"] = pd.read_sql_query("SELECT COUNT(ip) FROM ips group by id", conexion)
+-    with open("weak_pass.txt", "r") as file:
+-        weak_passwords = set(file.read().split("\n"))
+-    dataframe_comprometidas = dataframe[dataframe["contrasena"].isin(weak_passwords)]
+-    dataframe_no_comprometidas = dataframe[~dataframe["contrasena"].isin(weak_passwords)]
+-    print("Número de contraseñas comprometidas:", len(dataframe_comprometidas))
+-    print("Número de contraseñas no comprometidas:", len(dataframe_no_comprometidas))
+-
+ 
+ 
+diff --git a/Ejercicio2/ConsultasEJ2.py b/Ejercicios2,
+rename from Ejercicio2/ConsultasEJ2.py
+rename to Ejercicios2,
+diff --git a/Ejercicio2/users.json b/Ejercicios2,
+rename from Ejercicio2/users.json
+rename to Ejercicios2,
+diff --git a/Ejercicio2/database.db b/Ejercicios2,
+rename from Ejercicio2/database.db
+rename to Ejercicios2,
+diff --git a/Ejercicio2/legal.json b/Ejercicios2,
+rename from Ejercicio2/legal.json
+rename to Ejercicios2,

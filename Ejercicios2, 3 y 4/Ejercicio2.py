@@ -82,4 +82,3 @@ print("Valor mínimo del número de emails recibidos:\n", minEmailsTotales(dataf
 def maxEmailsTotales(dataframe) -> int:
     return dataframe["emails_total"].max()
 print("Valor máximo del número de emails recibidos:\n", maxEmailsTotales(dataframe))
-

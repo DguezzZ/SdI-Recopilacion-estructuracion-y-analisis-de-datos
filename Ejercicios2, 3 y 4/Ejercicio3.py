@@ -59,23 +59,23 @@ def permisos(tipop: int):
 
 
 def observaciones(dataframe):
-    return dataframe["emails_phising"].sum()
+    return dataframe["emails_phishing"].sum()
 
 
 def missing(dataframe):
     cont = 0
     for index, row in dataframe.iterrows():
-        if row["email_phising"] is None or math.isnan(row["emails_phising"]):
+        if row["emails_phishing"] is None or math.isnan(row["emails_phishing"]):
             cont = cont + 1
     return cont
 
 
 def mediana(dataframe):
-    return np.median(dataframe["emails_phising"].to_numpy())
+    return np.median(dataframe["emails_phishing"].to_numpy())
 
 
 def media(dataframe) -> float:
-    return dataframe["emails_phising"].sum / len(dataframe)
+    return dataframe["emails_phishing"].sum() / len(dataframe)
 
 
 def varianza(dataframe):
