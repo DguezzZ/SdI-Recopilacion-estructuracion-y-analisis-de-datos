@@ -13,7 +13,7 @@ def createDB():
 
     controlador.execute("CREATE TABLE usuarios (id text, telefono text, contrasena text, provincia text, "
                       "permisos bool, emails_total integer, emails_phishing integer, emails_clicados integer, "
-                      "constraint PK_usuarios primary key (id)) ")
+                      "constraint PK_usuarios primary key (id))")
     controlador.execute(
         "CREATE TABLE fechas (id text, fecha text, constraint PK_fechas primary key (id,fecha), "
         "constraint FK_fechas_usuarios foreign key (id) references usuarios(id))")
