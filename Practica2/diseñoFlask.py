@@ -14,6 +14,11 @@ controlador = con.cursor()
 
 app = Flask(__name__)
 
+@app.route('/')
+def mainPage():
+    return render_template('mainPage.html')
+
+
 @app.route('/ultimasVulnerabilidades', methods = ['GET'])
 def ultimas_vulnerabilidades():
     array = [1,2,3]
