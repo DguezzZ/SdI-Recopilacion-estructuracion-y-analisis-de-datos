@@ -28,6 +28,15 @@ def ultimas_vulnerabilidades():
 
         return render_template('ultimasVulnerabilidades.html')                      # imprimirá en formato HTML las 10 primeras vulnerabilidades de la respuesta
 
+def usuarios_criticos(top: int):
+    usr = pd.read_sql_query("SELECT id, emails_phishing, emails_clicados FROM usuarios", con)
+    for index, fila in usr.iterrows():
+        if fila["emails_phishing"] > 0:
+            usr._set_value(index, "probabilidad_click", fila["emails_clicados"]/ fila["emails_phishing"])
+        else:
+            usr._set_value(index, "probabilidad_click", 0)
+    usr.sort_values("probabilidad_click", ascending=False)
+
 
 if __name__ == '__main__':
     app.run(debug=True)
