@@ -41,7 +41,33 @@ def usuarios_criticos(top: int):
             usr._set_value(index, "probabilidad_click", fila["emails_clicados"]/ fila["emails_phishing"])
         else:
             usr._set_value(index, "probabilidad_click", 0)
-    usr.sort_values("probabilidad_click", ascending=False)
+    usr = usr.sort_values("probabilidad_click", ascending=False).head(top)
+    return usr
+
+def webs_vulnerables(top: int):
+    web = pd.read_sql_query("SELECT url, cookies, aviso, proteccion_de_datos FROM legal", con)
+    web["Seguridad"] = web["cookies"] + web["aviso"] + web["proteccion_de_datos"]
+    web = web.sort_values("Seguridad", ascending=False).head(top)
+    return web
+
+def usuarios_spam(mayor: bool):
+    if mayor:
+        usr = pd.read_sql_query("SELECT id, telefono, provincia, emails_total, emails_phishing, emails_clicados FROM usuarios where emails_clicados>=usuarios.emails_phishing/2", con)
+    else:
+        usr = pd.read_sql_query("SELECT id, telefono, provincia, emails_total, emails_phishing, emails_clicados FROM usuarios where emails_clicados<usuarios.emails_phishing/2", con)
+    return usr
+
+def ultimas_vul():
+    respuesta = requests.get("https://www.cve-search.org/api/")
+    if respuesta.status_code != 200:
+        raise Exception
+    else:
+        json = respuesta.text
+        data = pd.DataFrame()
+        data["summary"] = pd.read_json(json)["summary"]
+        data["id"] = pd.read_json(json)["id"]
+        return data.head(10).to_html()
+
 
 
 if __name__ == '__main__':

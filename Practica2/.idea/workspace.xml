@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="7581f685-00c8-4e48-bbb0-88f4a8ff8dd8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="7581f685-00c8-4e48-bbb0-88f4a8ff8dd8" name="Changes" comment="usuarios_criticos">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/diseñoFlask.py" beforeDir="false" afterPath="$PROJECT_DIR$/diseñoFlask.py" afterDir="false" />
     </list>
@@ -36,6 +35,14 @@
       <updated>1652352114954</updated>
       <workItem from="1652352116308" duration="17000" />
     </task>
+    <task id="LOCAL-00001" summary="usuarios_criticos">
+      <created>1652358644879</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1652358644879</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -51,6 +58,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="usuarios_criticos" />
+    <option name="LAST_COMMIT_MESSAGE" value="usuarios_criticos" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
