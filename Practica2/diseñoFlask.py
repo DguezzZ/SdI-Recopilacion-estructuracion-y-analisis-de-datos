@@ -16,6 +16,7 @@ app = Flask(__name__)
 
 @app.route('/ultimasVulnerabilidades', methods = ['GET'])
 def ultimas_vulnerabilidades():
+    array = [1,2,3]
 ##revisar oscar##
 #    respuesta = requests.get("https://cve.circl.lu/api/last")       # guardamos la respuesta del servidor con las vulnerabilidades en tiempo real
 #    if respuesta.status_code != 200:                                # si la respuesta es distinta de 200 OK, nos salta a Exception para que no explote el código por el error
@@ -26,7 +27,7 @@ def ultimas_vulnerabilidades():
     #    dataframe["id"] = pd.read_json(archivo)["id"]               # leerá el ID de la vulnerabilidad del archivo JSON
      #   dataframe["summary"] = pd.read_json(archivo)["summary"]     # leerá el resumen o descripcion de la vulnerabildad del archivo JSON
 
-        return render_template('ultimasVulnerabilidades.html')                      # imprimirá en formato HTML las 10 primeras vulnerabilidades de la respuesta
+    return render_template('ultimasVulnerabilidades.html',pene=array)                      # imprimirá en formato HTML las 10 primeras vulnerabilidades de la respuesta
 
 
 if __name__ == '__main__':
