@@ -11,7 +11,7 @@ conexion = sqlite3.connect('database.db')
 controlador = conexion.cursor()
 
 
-app = Flask(__name__, template_folder='templates', static_folder='static')
+app = Flask(__name__, template_folder='templates', static_folder='templates')
 app.config['SECRET_KEY'] = '1'
 login_manager = LoginManager(app)
 login_manager.login_view = "/login"
