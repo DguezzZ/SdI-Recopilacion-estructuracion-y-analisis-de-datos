@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WebsVulnerables</title>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
+</head>
+<body>
+    <form method="GET">
+          <label> Webs a mostrar</label>
+      <input type="number" name="value" value="{{value}}" required><br>
+      <br>
+      <input type="submit" name="submit">
+
+
+      </form>
+    <div id="bloque_grafico" style="width: 100%;text-align: center;"></div>
+      <script type="text/javascript">
+          var par = {{grafico | safe}};
+          var opt = {"renderer": "canvas", "actions": false};  /* Options for the embedding */
+          vegaEmbed("#bloque_grafico", par, opt);
+      </script>
+
+</body>
+</html>

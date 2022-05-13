@@ -1,12 +1,3 @@
-<Title>Aqui el titulo que pone en la pagina</Title>
-<h2>Esto es un tamaño grande</h2>
-<h3>Asi mas pequeño y sucesivamente</h3>
-{% if pene %}
-<ul>
-    {% for puta in pene %}
-    <li>
-        {{ puta }}
-    </li>
-    {% endfor %}
-</ul>
-{% endif %}
+ {% autoescape off %}
+      {{ lista }}
+ {% endautoescape %}

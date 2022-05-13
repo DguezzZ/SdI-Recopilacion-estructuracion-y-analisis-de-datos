@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <form method="GET">
+              <label> Servicio a buscar</label><br>
+              <input type="text" name="servicio" value="{{servicio}}" required><br>
+              <input type="submit" name="submit">
+            </form>
+    <ol start="1">
+    {% for element in lista %}
+    <li>{{ element }}</li>
+    {% endfor %}
+    </ol>
+</body>
+</html>
