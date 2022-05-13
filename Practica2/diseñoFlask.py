@@ -1,11 +1,15 @@
 import pandas as pd
 import sqlite3
-from flask import Flask, render_template, request, redirect
 import altair as alt
 import requests
+from models.ModelUser import ModelUser
+from models.entities.User import User
 
+from Practica2.models.entitites.user import User
+from config import config
 from hashlib import md5
-from flask import Flask, render_template,request, redirect
+from flask import Flask, render_template, request, redirect, url_for, flash
+from flask_login import LoginManager, login_user, logout_user, login_required
 
 con = sqlite3.connect('database.db')
 controlador = con.cursor()
@@ -15,9 +19,30 @@ controlador = con.cursor()
 app = Flask(__name__)
 
 @app.route('/')
-def mainPage():
-    return render_template('mainPage.html')
+def index():
+    return redirect(url_for('login'))
 
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        user = User(0, request.form['username'], request.form['password'])
+        logged_user = ModelUser.login(con, user)
+        if logged_user != None:
+            if logged_user.password:
+                login_user(logged_user)
+                return redirect(url_for('main'))
+            else:
+                flash("Invalid password...")
+                return render_template('auth/login.html')
+        else:
+            flash("User not found...")
+            return render_template('auth/login.html')
+    else:
+        return render_template('auth/login.html')
+
+@app.route('/main')
+def main():
+    return render_template('main.html')
 
 @app.route('/ultimasVulnerabilidades', methods = ['GET'])
 def ultimas_vulnerabilidades():
@@ -71,6 +96,7 @@ def ultimas_vul():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.config.from_object(config['development'])
+    app.run()
 
 
