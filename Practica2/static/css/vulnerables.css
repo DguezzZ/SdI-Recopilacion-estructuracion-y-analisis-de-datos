@@ -1,0 +1,41 @@
+html,
+body {
+  background-color: lightsteelblue;
+  font-family: Copperplate, fantasy;
+}
+
+button{
+  background-color: white;
+  border-radius: 8px;
+  border: 2px solid royalblue;
+  transition-duration: 0.4s;
+
+}
+
+button:hover{
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+a:link, a:visited, a:active {
+    text-decoration:none;
+    text-align: center;
+    color:royalblue;
+}
+
+input[type=number]{
+  background-color: white;
+  border: 2px solid royalblue;
+  border-radius: 4px;
+  color:royalblue;
+  width: 50px;
+}
+
+input[type=submit]{
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}

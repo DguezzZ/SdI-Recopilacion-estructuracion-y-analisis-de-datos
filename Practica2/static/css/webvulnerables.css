@@ -1,0 +1,22 @@
+html,
+body {
+  background-color: lightsteelblue;
+  font-family: Copperplate, fantasy;
+}
+input[type=number]{
+  background-color: white;
+  border: 2px solid royalblue;
+  border-radius: 4px;
+  color:royalblue;
+  width: 50px;
+}
+
+input[type=submit]{
+  background-color: white;
+  border: none;
+  color: black;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
