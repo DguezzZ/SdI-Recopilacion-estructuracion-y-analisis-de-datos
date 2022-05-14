@@ -3,12 +3,16 @@ body {
   background-color: lightsteelblue;
   font-family: Copperplate, fantasy;
 }
-input[type=number]{
+input[type=text]{
   background-color: white;
   border: 2px solid royalblue;
   border-radius: 4px;
-  color:royalblue;
-  width: 50px;
+  color: #000000;
+  width: 150px;
+}
+
+input[type=text]:focus{
+  background-color: whitesmoke;
 }
 
 input[type=submit]{
@@ -63,3 +67,56 @@ a:link, a:visited, a:active {
   opacity: 1;
   right: 0;
 }
+
+ol {
+  counter-reset: li;
+  list-style: none;
+  padding: 0;
+}
+
+ol a {
+  position: relative;
+  display: block;
+  padding: .4em .4em .4em .8em;
+  margin: .5em 0 .5em 2.5em;
+  background: white;
+  color: #444;
+  transition: all .3s ease-out;
+}
+
+ol a:hover {background: #e0f4ff;}
+ol a:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  left: -2.5em;
+  top: 50%;
+  margin-top: -1em;
+  background: #b9b9b9;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  text-align: center;
+  font-weight: bold;
+}
+
+ol a:after {
+  position: absolute;
+  content: "";
+  border: .5em solid transparent;
+  left: -1em;
+  top: 50%;
+  margin-top: -.5em;
+  transition: all .3s ease-out;
+}
+
+
+
+
+
+
+
+
+
+
+

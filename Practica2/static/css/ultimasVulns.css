@@ -3,30 +3,6 @@ body {
   background-color: lightsteelblue;
   font-family: Copperplate, fantasy;
 }
-input[type=number]{
-  background-color: white;
-  border: 2px solid royalblue;
-  border-radius: 4px;
-  color:royalblue;
-  width: 50px;
-}
-
-input[type=submit]{
-  background-color: white;
-  border: none;
-  color: black;
-  padding: 16px 32px;
-  text-decoration: none;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-a:link, a:visited, a:active {
-    text-decoration:none;
-    text-align: center;
-    color:royalblue;
-}
-
 .backbutton {
   display: inline-block;
   border-radius: 8px;
@@ -62,4 +38,28 @@ a:link, a:visited, a:active {
 .backbutton:hover span:after {
   opacity: 1;
   right: 0;
+}
+
+tr{
+  border-collapse: collapse;
+  width: 60%;
+  text-align: center;
+  background-color: white;
+  border: 2px black;
+}
+
+tr:hover{
+  background-color: #e0f4ff;
+}
+th{
+  text-justify: auto;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #b9b9b9;
+  color: #36c;
+  border: 2px black;
+  padding: 10px;
+}
+td{
+  border: 2px #ddd;
 }

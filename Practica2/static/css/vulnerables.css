@@ -9,7 +9,6 @@ button{
   border-radius: 8px;
   border: 2px solid royalblue;
   transition-duration: 0.4s;
-
 }
 
 button:hover{
@@ -38,4 +37,65 @@ input[type=submit]{
   text-decoration: none;
   margin: 4px 2px;
   cursor: pointer;
+}
+.backbutton {
+  display: inline-block;
+  border-radius: 8px;
+  background-color: white;
+  border: 2px solid black;
+  color: black;
+  text-align: center;
+  padding: 5px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
+
+.backbutton span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.backbutton span:after {
+  content: '\00AB';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: -90px;
+  transition: 0.5s;
+}
+
+.backbutton:hover span {
+  padding-left: 25px;
+}
+
+.backbutton:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+
+tr{
+  border-collapse: collapse;
+  width: 30%;
+  text-align: center;
+  background-color: white;
+  border: 2px black;
+}
+
+tr:hover{
+  background-color: #e0f4ff;
+}
+th{
+  text-justify: auto;
+  text-align: center;
+  text-transform: uppercase;
+  background-color: #b9b9b9;
+  color: #36c;
+  border: 2px black;
+  padding: 10px;
+}
+td{
+  border: 2px #ddd;
 }

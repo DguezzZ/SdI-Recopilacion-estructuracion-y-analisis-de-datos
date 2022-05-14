@@ -1,3 +1,11 @@
+
+<link rel="stylesheet" href="/static/css/ultimasVulns.css">
+<body>
+<p><button2 class="backbutton" onclick="history.go(-1)"><span>Volver Atrás</span></button2></p>
+<h1>Aquí podrás ver las 10 últimas vulnerabilidades en tiempo real </h1>
  {% autoescape off %}
-      {{ lista }}
+<div style="overflow-x:auto;">
+<table style="width: 100%">{{ lista }}</table>
+</div>
  {% endautoescape %}
+</body>

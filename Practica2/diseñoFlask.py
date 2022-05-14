@@ -41,7 +41,6 @@ def ultimas_vulnerabilidades():
         df = pd.DataFrame()
         df["id"] = pd.read_json(archivo)["id"]               # leerá el ID de la vulnerabilidad del archivo JSON
         df["summary"] = pd.read_json(archivo)["summary"]     # leerá el resumen o descripcion de la vulnerabildad del archivo JSON
-
     return render_template('ultimasVulnerabilidades.html',lista=df.head(10).to_html())    # imprimirá en formato HTML las 10 primeras vulnerabilidades de la respuesta
 
 @app.route('/obtenerservicios', methods = ['GET'])

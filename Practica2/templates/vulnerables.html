@@ -10,7 +10,10 @@
     <script src="https://cdn.jsdelivr.net/npm/vega-embed@6"></script>
 </head>
 <body>
-<h1>Aquí podrás ver los usuarios críticos del sistema</h1>
+
+<p><button2 class="backbutton" onclick="history.back()"><span>Volver Atrás</span></button2></p>
+
+    <h1>Aquí podrás ver los usuarios críticos del sistema</h1>
     <form method="GET">
         <p>
         <label class="label"> Usuarios a mostrar</label>
@@ -26,8 +29,8 @@
           var opt = {"renderer": "canvas", "actions": false};  /* Options for the embedding */
           vegaEmbed("#bloque_grafico", par, opt);
       </script>
-    <button><a href="?mayor=1">ver usuarios que han clickado más del 50%</a></button>
-    <button><a href="?mayor=0">ver usuarios que han clickado menos del 50%</a></button>
+    <p><button><a href="?mayor=1">ver usuarios que han clickado más del 50%</a></button>
+    <button><a href="?mayor=0">ver usuarios que han clickado menos del 50%</a></button></p>
     {% autoescape off %}
     {{ tablaUser }}
     {% endautoescape %}

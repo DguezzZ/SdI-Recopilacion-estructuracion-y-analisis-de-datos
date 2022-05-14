@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
+<link rel="stylesheet" href="/static/css/servicios.css">
+
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
+    <p><button2 class="backbutton" onclick="history.back()"><span>Volver Atrás</span></button2></p>
+    <h1>Aquí podrás consultar los servicios que desees</h1>
     <form method="GET">
-              <label> Servicio a buscar</label><br>
-              <input type="text" name="servicio" value="{{servicio}}" required><br>
+              <p>
+              <label> Servicio a buscar</label>
+              <input type="text" name="servicio" placeholder="p.e. {{servicio}}" required><br>
+              <br>
               <input type="submit" name="submit">
+              </p>
             </form>
     <ol start="1">
     {% for element in lista %}
-    <li>{{ element }}</li>
+    <li class=""><a href="#">{{ element }}</a></li>
     {% endfor %}
     </ol>
 </body>
