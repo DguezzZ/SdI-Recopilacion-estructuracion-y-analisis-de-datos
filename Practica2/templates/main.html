@@ -12,13 +12,19 @@
     {% block customCSS %}
     {% endblock %}
 </head>
-
 <body class="text-center">
     {% block body %}
     {% endblock %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
         crossorigin="anonymous"></script>
+
+<h1> BIENVENIDO A NUESTRA PÁGINA PRINCIPAL</h1>
+<p><form action="http://127.0.0.1:5000/vulnerables"><input type="submit" value="TOP usuarios y Webs" /></form></p>
+<p><form action="http://127.0.0.1:5000/webvulnerables"><input type="submit" value="WebsVulns" /></form></p>
+<p><form action="http://127.0.0.1:5000/ultimasVulnerabilidades"><input type="submit" value="ultimasVulns" /></form></p>
+<p><form action="http://127.0.0.1:5000/obtenerservicios"><input type="submit" value="Servicios" /></form></p>
+
 </body>
 
 </html>

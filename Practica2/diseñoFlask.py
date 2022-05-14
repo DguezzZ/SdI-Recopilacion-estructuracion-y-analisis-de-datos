@@ -2,7 +2,6 @@ import pandas as pd
 import sqlite3
 import altair as alt
 import requests
-from config import config
 from hashlib import md5
 from flask import Flask, render_template, request, redirect, url_for, flash
 import urllib.parse
@@ -27,7 +26,7 @@ def vulnerables():
 def pagvulnerables():
     df=webs_vulnerables(int(request.args.get('value',default=20)))
     grafico=alt.Chart(df).mark_bar().encode(x="url",y="Seguridad")
-    return render_template('vulnerables.html',grafico=grafico.to_json(),value=int(request.args.get('value',default=20)))
+    return render_template('webvulnerables.html',grafico=grafico.to_json(),value=int(request.args.get('value',default=20)))
 
 
 
