@@ -1,17 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}{% endblock %}</title>
-    <link rel="shortcut icon" href="{{ url_for('static', filename='img/flask.svg') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    {% block customCSS %}
-    {% endblock %}
-</head>
+<link rel="stylesheet" href="/static/css/main.css">
+
 <body class="text-center">
     {% block body %}
     {% endblock %}
@@ -20,11 +11,20 @@
         crossorigin="anonymous"></script>
 
 <h1> BIENVENIDO A NUESTRA PÁGINA PRINCIPAL</h1>
-<p><form action="http://127.0.0.1:5000/vulnerables"><input type="submit" value="TOP usuarios y Webs" /></form></p>
-<p><form action="http://127.0.0.1:5000/webvulnerables"><input type="submit" value="WebsVulns" /></form></p>
-<p><form action="http://127.0.0.1:5000/ultimasVulnerabilidades"><input type="submit" value="ultimasVulns" /></form></p>
-<p><form action="http://127.0.0.1:5000/obtenerservicios"><input type="submit" value="Servicios" /></form></p>
-
+    <div class="row">
+        <div class="column" style="background-color:#aaa;">
+            <p><form action="http://127.0.0.1:5000/vulnerables"><input type="submit" value="TOP usuarios y Webs"></form></p>
+        </div>
+        <div class="column" style="background-color:#bbb;">
+            <p><form action="http://127.0.0.1:5000/webvulnerables"><input type="submit" value="WebsVulns" /></form></p>
+        </div>
+        <div class="column" style="background-color:#ccc;">
+            <p><form action="http://127.0.0.1:5000/ultimasVulnerabilidades"><input type="submit" value="ultimasVulns" /></form></p>
+        </div>
+        <div class="column" style="background-color:#aaa;">
+            <p><form action="http://127.0.0.1:5000/obtenerservicios"><input type="submit" value="Servicios" /></form></p>
+        </div>
+    </div>
 </body>
 
 </html>
