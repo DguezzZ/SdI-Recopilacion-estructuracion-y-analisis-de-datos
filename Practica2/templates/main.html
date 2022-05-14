@@ -4,25 +4,48 @@
 <link rel="stylesheet" href="/static/css/main.css">
 
 <body class="text-center">
-    {% block body %}
-    {% endblock %}
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
-        crossorigin="anonymous"></script>
 
 <h1> BIENVENIDO A NUESTRA PÁGINA PRINCIPAL</h1>
     <div class="row">
-        <div class="column" style="background-color:#aaa;">
-            <p><form action="http://127.0.0.1:5000/vulnerables"><input type="submit" value="TOP usuarios y Webs"></form></p>
+        <div class="columna1">
+            <div class="imagenes">
+                <a href="http://127.0.0.1:5000/vulnerables">
+                    <img src="/static/imagenes/UwU.jpg" alt="UCYWV" style="width:100%">
+                    <div class="container">
+                        <p>Usuarios Críticos y Webs Vuln</p>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="column" style="background-color:#bbb;">
-            <p><form action="http://127.0.0.1:5000/webvulnerables"><input type="submit" value="WebsVulns" /></form></p>
+        <div class="columna2">
+            <div class="imagenes">
+                <a href="http://127.0.0.1:5000/webvulnerable">
+                    <img src="/static/imagenes/web-trafico-web.png" alt="wtv" style="width:100%">
+                    <div class="container">
+                        <p>Webs Vulnerables</p>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="column" style="background-color:#ccc;">
-            <p><form action="http://127.0.0.1:5000/ultimasVulnerabilidades"><input type="submit" value="ultimasVulns" /></form></p>
+        <div class="columna3">
+             <div class="imagenes">
+                <a href="http://127.0.0.1:5000/ultimasVulnerabilidades">
+                    <img src="/static/imagenes/top10owasp.jpg" alt="t10owasp" style="width:100%">
+                    <div class="container">
+                        <p>Top 10 Vulnerabilidades</p>
+                    </div>
+                </a>
+            </div>
         </div>
-        <div class="column" style="background-color:#aaa;">
-            <p><form action="http://127.0.0.1:5000/obtenerservicios"><input type="submit" value="Servicios" /></form></p>
+        <div class="columna4">
+            <div class="imagenes">
+                <a href="http://127.0.0.1:5000/obtenerservicios">
+                    <img src="/static/imagenes/services.jpg" alt="services" style="width:100%">
+                    <div class="container">
+                        <p>Proveedor de Servicios</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
 </body>
