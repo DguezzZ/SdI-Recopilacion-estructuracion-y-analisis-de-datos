@@ -1,0 +1,165 @@
+Index: Practica2/InteligenciaArtificial/Ejercicio6.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Practica2/InteligenciaArtificial/Ejercicio6.py b/Practica2/InteligenciaArtificial/Ejercicio6.py
+new file mode 100644
+--- /dev/null	(date 1652615471603)
++++ b/Practica2/InteligenciaArtificial/Ejercicio6.py	(date 1652615471603)
+@@ -0,0 +1,132 @@
++import matplotlib.pyplot as plt
++import numpy as np
++import pandas as pd
++import json
++
++##regresionlinear##
++from sklearn import datasets, linear_model
++from sklearn.metrics import mean_squared_error, r2_score
++
++##decisiontree##
++from sklearn import tree
++from sklearn.datasets import load_iris
++
++##randomforest##
++from sklearn.ensemble import RandomForestClassifier
++from sklearn.tree import export_graphviz
++from subprocess import call
++import graphviz
++
++array_usernames = []
++array_recibidos = []
++array_clickados = []
++array_vulnerables = []
++
++## VAMOS A ENTRENAR EL SISTEMA CON EL ARCHIVO "users_IA_clases.json" QUE TIENE 30 USUARIOS DIVIDIENDOLO POR LA MITAD PARA TRAIN/TEST ##
++
++with open("users_IA_clases.json", "r") as file:
++    data = json.load(file)
++for usuario in data["usuarios"]:
++    array_usernames = array_usernames + [usuario["usuario"]]
++    array_recibidos = array_recibidos + [usuario["emails_phishing_recibidos"]]
++    array_clickados = array_clickados + [usuario["emails_phishing_clicados"]]
++    array_vulnerables = array_vulnerables + [usuario["vulnerable"]]
++
++## METEMOS LOS DATOS EN UN DATA FRAME CALCULANDO LA PROBABILIDAD DE CLICKAR EN UN EMAIL PHISING RECIBIDO ##
++
++df = pd.DataFrame()
++df["array_recibidos"] = array_recibidos
++df["array_clickados"] = array_clickados
++for index, row in df.iterrows():
++    if row["array_recibidos"] == 0:
++        df._set_value(index, "prob_click", 0)
++    else:
++        df._set_value(index, "prob_click", row["array_clickados"] / row["array_recibidos"])
++df = df.to_numpy()
++
++df_etiqueta = pd.DataFrame()
++df_etiqueta["vulnerable"] = array_vulnerables
++
++##linear regression##
++
++# Use only one feature
++df = df[:, np.newaxis, 2]
++# Split the data into training/testing sets # # half/half = 15/15 #
++df_train = df[:-15]
++df_test = df[-15:]
++# Split the targets into training/testing sets
++df_etiqueta_train = df_etiqueta[:-15]
++df_etiqueta_test = df_etiqueta[-15:]
++## Create linear regression object
++regr = linear_model.LinearRegression()
++# Train the model using the training sets
++regr.fit(df_train, df_train)
++print(regr.coef_)
++# Make predictions using the testing set
++df_pred = regr.predict(df_test)
++# The mean squared error
++print("Linear Regression mean squared error: %.2f" % mean_squared_error(df_etiqueta_test, df_pred))
++
++## Plot linear regression outputs
++plt.scatter(df_test, df_etiqueta_test, color="black")
++plt.plot(df_test, df_pred, color="blue", linewidth=3)
++plt.xticks(())
++plt.yticks(())
++plt.show()
++
++
++##AHORA USAREMOS NUESTRO DATASET DE PREDECIR##
++
++array_usernames = []
++array_recibidos = []
++array_clickados = []
++
++with open("users_IA_predecir.json", "r") as file:
++    data = json.load(file)
++for user in data["usuarios"]:
++    array_usernames = array_usernames + [user["usuario"]]
++    array_recibidos = array_recibidos + [user["emails_phishing_recibidos"]]
++    array_clickados = array_clickados + [user["emails_phishing_clicados"]]
++
++
++##dataframes sobre predecir/testing data##
++df = pd.DataFrame()
++df["array_recibidos"] = array_recibidos
++df["array_clickados"] = array_clickados
++for index, row in df.iterrows():
++    if row["array_recibidos"] == 0:
++        df._set_value(index, "prob_click", 0)
++    else:
++        df._set_value(index, "prob_click", row["array_clickados"] / row["array_recibidos"])
++df = df.to_numpy()
++
++##linear regression##
++df=df[:,np.newaxis,2]
++df_pred = regr.predict(df)
++print(df_pred)
++
++## Decisión tree ##
++X, y = df_train, df_etiqueta_train
++clf = tree.DecisionTreeClassifier()
++clf = clf.fit(X, y)
++
++## Random Forest ##
++clf2 = RandomForestClassifier(max_depth=2, random_state=0,n_estimators=10)
++clf2.fit(X, y.values.ravel())
++print(clf.predict(df))
++
++## Plot decision tree ##
++dot_data = tree.export_graphviz(clf, out_file=None)
++graph = graphviz.Source(dot_data)
++graph.render("decisiontree")
++dot_data = tree.export_graphviz(clf, out_file=None,filled=True, rounded=True,special_characters=True)
++graph = graphviz.Source(dot_data)
++graph.render('decisiontree.gv', view=True).replace('\\', '/')
++##Random forest##
++print(clf2.predict(df))
++for i in range(len(clf2.estimators_)):
++    estimator = clf2.estimators_[i]
++    dot_data= export_graphviz(estimator,out_file=None,rounded=True, proportion=False,precision=2, filled=True)
++    #call(['dot', '-Tpng', 'randomforest.dot', '-o', 'tree'+str(i)+'.png', '-Gdpi=600'])
++    graph = graphviz.Source(dot_data)
++    graph.render('randomforest'+str(i)+'.gv', view=True).replace('\\', '/')
+Index: Practica2/InteligenciaArtificial/users_IA_clases.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Practica2/InteligenciaArtificial/users_IA_clases.json b/Practica2/InteligenciaArtificial/users_IA_clases.json
+new file mode 100644
+--- /dev/null	(date 1651602363712)
++++ b/Practica2/InteligenciaArtificial/users_IA_clases.json	(date 1651602363712)
+@@ -0,0 +1,1 @@
++{"usuarios": [{"usuario": "sergio.garcia", "emails_phishing_recibidos": 22, "emails_phishing_clicados": 21, "vulnerable": 1}, {"usuario": "luis.munoz", "emails_phishing_recibidos": 22, "emails_phishing_clicados": 14, "vulnerable": 1}, {"usuario": "pepe.suarez", "emails_phishing_recibidos": 126, "emails_phishing_clicados": 86, "vulnerable": 1}, {"usuario": "julio.martinez", "emails_phishing_recibidos": 226, "emails_phishing_clicados": 117, "vulnerable": 1}, {"usuario": "sara.lozano", "emails_phishing_recibidos": 87, "emails_phishing_clicados": 56, "vulnerable": 1}, {"usuario": "ines.diaz", "emails_phishing_recibidos": 23, "emails_phishing_clicados": 4, "vulnerable": 0}, {"usuario": "juan.lopez", "emails_phishing_recibidos": 93, "emails_phishing_clicados": 46, "vulnerable": 0}, {"usuario": "luzmaria.lozano", "emails_phishing_recibidos": 22, "emails_phishing_clicados": 16, "vulnerable": 1}, {"usuario": "alicia.castro", "emails_phishing_recibidos": 165, "emails_phishing_clicados": 17, "vulnerable": 0}, {"usuario": "directivo", "emails_phishing_recibidos": 143, "emails_phishing_clicados": 4, "vulnerable": 0}, {"usuario": "administrador", "emails_phishing_recibidos": 276, "emails_phishing_clicados": 50, "vulnerable": 0}, {"usuario": "contacto", "emails_phishing_recibidos": 23, "emails_phishing_clicados": 13, "vulnerable": 1}, {"usuario": "no-reply", "emails_phishing_recibidos": 30, "emails_phishing_clicados": 25, "vulnerable": 1}, {"usuario": "ceo", "emails_phishing_recibidos": 291, "emails_phishing_clicados": 286, "vulnerable": 1}, {"usuario": "contrataciones", "emails_phishing_recibidos": 205, "emails_phishing_clicados": 92, "vulnerable": 0}, {"usuario": "legal", "emails_phishing_recibidos": 144, "emails_phishing_clicados": 64, "vulnerable": 0}, {"usuario": "inteligencia-artificial", "emails_phishing_recibidos": 133, "emails_phishing_clicados": 19, "vulnerable": 0}, {"usuario": "personal", "emails_phishing_recibidos": 1, "emails_phishing_clicados": 0, "vulnerable": 0}, {"usuario": "jesus.duarte", "emails_phishing_recibidos": 108, "emails_phishing_clicados": 91, "vulnerable": 1}, {"usuario": "raul.perez", "emails_phishing_recibidos": 0, "emails_phishing_clicados": 0, "vulnerable": 0}, {"usuario": "javier.osorio", "emails_phishing_recibidos": 33, "emails_phishing_clicados": 31, "vulnerable": 1}, {"usuario": "eduardo.galan", "emails_phishing_recibidos": 382, "emails_phishing_clicados": 9, "vulnerable": 0}, {"usuario": "enrique.sanz", "emails_phishing_recibidos": 8, "emails_phishing_clicados": 2, "vulnerable": 0}, {"usuario": "info", "emails_phishing_recibidos": 93, "emails_phishing_clicados": 24, "vulnerable": 0}, {"usuario": "leo.moran", "emails_phishing_recibidos": 49, "emails_phishing_clicados": 3, "vulnerable": 0}, {"usuario": "ivan.fernandez", "emails_phishing_recibidos": 60, "emails_phishing_clicados": 46, "vulnerable": 1}, {"usuario": "clara.marin", "emails_phishing_recibidos": 372, "emails_phishing_clicados": 301, "vulnerable": 1}, {"usuario": "virgnia.cruz", "emails_phishing_recibidos": 21, "emails_phishing_clicados": 9, "vulnerable": 0}, {"usuario": "pruebas", "emails_phishing_recibidos": 105, "emails_phishing_clicados": 101, "vulnerable": 1}, {"usuario": "fran.moreno", "emails_phishing_recibidos": 17, "emails_phishing_clicados": 2, "vulnerable": 0}]}
+Index: Practica2/InteligenciaArtificial/users_IA_predecir.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Practica2/InteligenciaArtificial/users_IA_predecir.json b/Practica2/InteligenciaArtificial/users_IA_predecir.json
+new file mode 100644
+--- /dev/null	(date 1651602360471)
++++ b/Practica2/InteligenciaArtificial/users_IA_predecir.json	(date 1651602360471)
+@@ -0,0 +1,1 @@
++{"usuarios": [{"usuario": "sergio.garcia", "emails_phishing_recibidos": 54, "emails_phishing_clicados": 53}, {"usuario": "luis.munoz", "emails_phishing_recibidos": 95, "emails_phishing_clicados": 63}, {"usuario": "pepe.suarez", "emails_phishing_recibidos": 149, "emails_phishing_clicados": 146}, {"usuario": "julio.martinez", "emails_phishing_recibidos": 176, "emails_phishing_clicados": 59}, {"usuario": "sara.lozano", "emails_phishing_recibidos": 138, "emails_phishing_clicados": 74}, {"usuario": "ines.diaz", "emails_phishing_recibidos": 57, "emails_phishing_clicados": 17}, {"usuario": "juan.lopez", "emails_phishing_recibidos": 168, "emails_phishing_clicados": 135}, {"usuario": "luzmaria.lozano", "emails_phishing_recibidos": 42, "emails_phishing_clicados": 5}, {"usuario": "alicia.castro", "emails_phishing_recibidos": 86, "emails_phishing_clicados": 44}, {"usuario": "directivo", "emails_phishing_recibidos": 5, "emails_phishing_clicados": 2}, {"usuario": "administrador", "emails_phishing_recibidos": 112, "emails_phishing_clicados": 106}, {"usuario": "contacto", "emails_phishing_recibidos": 36, "emails_phishing_clicados": 35}, {"usuario": "no-reply", "emails_phishing_recibidos": 112, "emails_phishing_clicados": 85}, {"usuario": "ceo", "emails_phishing_recibidos": 140, "emails_phishing_clicados": 131}, {"usuario": "contrataciones", "emails_phishing_recibidos": 24, "emails_phishing_clicados": 23}, {"usuario": "legal", "emails_phishing_recibidos": 32, "emails_phishing_clicados": 20}, {"usuario": "inteligencia-artificial", "emails_phishing_recibidos": 155, "emails_phishing_clicados": 27}, {"usuario": "personal", "emails_phishing_recibidos": 190, "emails_phishing_clicados": 145}, {"usuario": "jesus.duarte", "emails_phishing_recibidos": 140, "emails_phishing_clicados": 119}, {"usuario": "raul.perez", "emails_phishing_recibidos": 160, "emails_phishing_clicados": 109}, {"usuario": "javier.osorio", "emails_phishing_recibidos": 108, "emails_phishing_clicados": 38}, {"usuario": "eduardo.galan", "emails_phishing_recibidos": 84, "emails_phishing_clicados": 45}, {"usuario": "enrique.sanz", "emails_phishing_recibidos": 119, "emails_phishing_clicados": 113}, {"usuario": "info", "emails_phishing_recibidos": 182, "emails_phishing_clicados": 111}, {"usuario": "leo.moran", "emails_phishing_recibidos": 39, "emails_phishing_clicados": 2}, {"usuario": "ivan.fernandez", "emails_phishing_recibidos": 44, "emails_phishing_clicados": 15}, {"usuario": "clara.marin", "emails_phishing_recibidos": 198, "emails_phishing_clicados": 134}, {"usuario": "virgnia.cruz", "emails_phishing_recibidos": 99, "emails_phishing_clicados": 66}, {"usuario": "pruebas", "emails_phishing_recibidos": 111, "emails_phishing_clicados": 27}, {"usuario": "fran.moreno", "emails_phishing_recibidos": 40, "emails_phishing_clicados": 25}]}
+\ No newline at end of file
