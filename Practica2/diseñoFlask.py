@@ -2,7 +2,6 @@ import pandas as pd
 import sqlite3
 import altair as alt
 import requests
-from hashlib import md5
 from flask import Flask, render_template, request, redirect, url_for, flash
 import urllib.parse
 
@@ -33,15 +32,15 @@ def pagvulnerables():
 @app.route('/ultimasVulnerabilidades', methods = ['GET'])
 def ultimas_vulnerabilidades():
 
-    respuesta = requests.get("https://cve.circl.lu/api/last")       # guardamos la respuesta del servidor con las vulnerabilidades en tiempo real
-    if respuesta.status_code != 200:                                # si la respuesta es distinta de 200 OK, nos salta a Exception para que no explote el código por el error
+    respuesta = requests.get("https://cve.circl.lu/api/last")
+    if respuesta.status_code != 200:
        raise Exception
-    else:                                                           # si la respuesta es 200 OK, empezamos a trabajar
-        archivo = respuesta.text                                     # en un formato JSON (archivo), guardamos la respuesta del servidorr
+    else:
+        archivo = respuesta.text
         df = pd.DataFrame()
-        df["id"] = pd.read_json(archivo)["id"]               # leerá el ID de la vulnerabilidad del archivo JSON
-        df["summary"] = pd.read_json(archivo)["summary"]     # leerá el resumen o descripcion de la vulnerabildad del archivo JSON
-    return render_template('ultimasVulnerabilidades.html',lista=df.head(10).to_html())    # imprimirá en formato HTML las 10 primeras vulnerabilidades de la respuesta
+        df["id"] = pd.read_json(archivo)["id"]
+        df["summary"] = pd.read_json(archivo)["summary"]
+    return render_template('ultimasVulnerabilidades.html',lista=df.head(10).to_html())
 
 @app.route('/obtenerservicios', methods = ['GET'])
 def obtenerservicio():
@@ -63,7 +62,7 @@ def usuarios_criticos(top: int):
 def webs_vulnerables(top: int):
     web = pd.read_sql_query("SELECT url, cookies, aviso, proteccion_de_datos FROM legal", con)
     web["Seguridad"] = web["cookies"] + web["aviso"] + web["proteccion_de_datos"]
-    web = web.sort_values("Seguridad", ascending=False).head(top)
+    web = web.sort_values("Seguridad", ascending=True).head(top)
     return web
 
 def usuarios_spam(mayor: int):
@@ -85,7 +84,6 @@ def ultimas_vul():
         return data.head(10).to_html()
 
 def buscador_servicios(servicio: str):
-    print('UwU')
     respuesta = requests.get("http://cve.circl.lu/api/browse/"+urllib.parse.quote(servicio))
     if respuesta.status_code != 200:
         raise Exception
@@ -97,7 +95,6 @@ def buscador_servicios(servicio: str):
         return data.to_html()
 
 def buscador_servicios2(servicio: str):
-    print('UwU')
     respuesta = requests.get("http://cve.circl.lu/api/browse/"+urllib.parse.quote(servicio))
     if respuesta.status_code != 200:
         raise Exception
